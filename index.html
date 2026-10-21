@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Digital business card for Jeereen Bennington, Broadcasting & Production at Capital Group.">
+  <title>Jeereen Bennington | Capital Group</title>
+  <style>
+    :root { --bg:#101010; --panel:#191919; --purple:#6b16e1; --text:#f7f5fb; --muted:#b9b2c7; --line:#39333f; }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; padding:24px;
+      display:flex; align-items:center; justify-content:center;
+      background:radial-gradient(ellipse at top, #24123c 0%, var(--bg) 55%);
+      color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    .card {
+      width:100%; max-width:410px; padding:32px 24px 24px;
+      background:rgba(25,25,25,.97); border:1px solid var(--line);
+      border-radius:24px; box-shadow:0 20px 65px #0009; text-align:center;
+    }
+    .monogram {
+      width:78px; height:78px; margin:0 auto 18px; display:grid; place-items:center;
+      border-radius:22px; background:linear-gradient(145deg,#812dff,var(--purple));
+      color:white; font-size:25px; font-weight:850; letter-spacing:-1px;
+      box-shadow:0 8px 28px #6b16e155;
+    }
+    .eyebrow { margin:0 0 10px; color:#c9a9ff; font-size:11px; letter-spacing:2.4px; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(25px,6vw,32px); line-height:1.12; letter-spacing:-.8px; }
+    .role { margin:12px 0 5px; font-size:15px; font-weight:650; }
+    .company { margin:0 0 26px; color:var(--muted); font-size:14px; }
+    .actions { display:grid; gap:10px; }
+    .action {
+      min-height:48px; display:flex; align-items:center; justify-content:center; gap:9px;
+      padding:13px 16px; border-radius:12px; border:1px solid var(--line);
+      background:#222; color:var(--text); text-decoration:none; font-weight:650; font-size:14px;
+      transition:transform .15s ease, background .15s ease; cursor:pointer; font-family:inherit;
+    }
+    .action.primary { background:var(--purple); border-color:var(--purple); }
+    .action:hover { transform:translateY(-1px); background:#30263e; }
+    .action.primary:hover { background:#7c2af0; }
+    .note { margin:22px 0 0; color:#9f98aa; font-size:11px; letter-spacing:.4px; }
+    .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#9d68ff; margin-right:7px; vertical-align:middle; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="monogram" aria-label="Jeereen Bennington initials">JB</div>
+    <p class="eyebrow">Digital Business Card</p>
+    <h1>Jeereen Bennington</h1>
+    <p class="role">Broadcasting &amp; Production</p>
+    <p class="company">Capital Group</p>
+    <nav class="actions" aria-label="Contact actions">
+      <a class="action primary" href="tel:8779694058">Call Me</a>
+      <a class="action" href="mailto:jeereen@capitalgroup.me">Email Me</a>
+      <a class="action" href="https://capitalgroup.me">Visit Website</a>
+      <a class="action" href="contact.vcf" download>Save Contact</a>
+      <button class="action" id="share" type="button">Share My Card</button>
+    </nav>
+    <p class="note"><span class="dot"></span>Tap to connect · Keep in touch</p>
+  </main>
+  <script>
+    const shareButton = document.getElementById('share');
+    shareButton.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Jeereen Bennington | Capital Group',
+        text: 'Jeereen Bennington — Broadcasting & Production, Capital Group',
+        url: window.location.href
+      };
+      try {
+        if (navigator.share) await navigator.share(shareData);
+        else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(window.location.href);
+          shareButton.textContent = 'Link copied';
+        } else {
+          window.prompt('Copy your business-card link:', window.location.href);
+        }
+      } catch (e) { /* User cancelled sharing. */ }
+    });
+  </script>
+</body>
+</html>
